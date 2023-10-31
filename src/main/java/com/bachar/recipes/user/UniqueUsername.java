@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 public @interface UniqueUsername {
     String message() default "This name is in use";
 
-    Class<?>[] group() default {};
+    Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
