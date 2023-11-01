@@ -15,17 +15,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min = 4)
-    @UniqueUsername
+    @NotNull(message = "{app.constraints.username.NotNull.message}")
+    @Size(min = 4, message = "{app.constraints.Size.message}")
+    @UniqueUsername(message = "{app.constraints.username.UniqueUsername.message}")
     private String username;
 
-    @NotNull
-    @Size(min = 4)
+    @NotNull(message = "{app.constraints.displayName.NotNull.message}")
+    @Size(min = 4, message = "{app.constraints.Size.message}")
     private String displayName;
 
-    @NotNull
-    @Size(min = 8)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
+    @NotNull(message = "{app.constraints.password.NotNull.message}")
+    @Size(min = 8, message = "{app.constraints.Size.message}")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{app.constraints.password.Pattern.message}")
     private String password;
 }

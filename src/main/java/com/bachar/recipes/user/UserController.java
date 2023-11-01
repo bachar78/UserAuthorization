@@ -29,7 +29,7 @@ public class UserController {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ApiError handleValidationException(MethodArgumentNotValidException exception, HttpServletRequest request) {
-        ApiError apiError = new ApiError(400, "VAlidation error", request.getServletPath());
+        ApiError apiError = new ApiError(400, "Validation Error", request.getServletPath());
 //        apiError.setMessage(exception.getMessage());
 //        apiError.setUrl(request.getRequestURI());
 //        apiError.setStatus(exception.getStatusCode().value());

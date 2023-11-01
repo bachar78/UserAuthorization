@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -124,11 +125,45 @@ public class UserControllerTest {
         ResponseEntity<Object> response = postSignUp(user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
+
     @Test
-    public void postUser_whenUserHasPasswordWithNotValidValues_returnBadRequest() {
-        User user = new User();
+    public void postUser_whenUserIsInvalid_receiveApiError() {
+        User user = createValidUser();
+        user.setUsername("abc");
         ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
         assertThat(response.getBody().getUrl()).isEqualTo(API_1_0_USERS);
+    }
+
+    @Test
+    public void postUser_whenUserWithNullFields_receiveApiErrorWithValidationError() {
+        User user = new User();
+        ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
+        assertThat(response.getBody().getValidationErrors().size()).isEqualTo(3);
+    }
+    @Test
+    public void postUser_whenUserHasNullUsername_receiveMessageOfNullErrorForUsername() {
+        User user = createValidUser();
+        user.setUsername(null);
+        ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
+        Map<String, String> validationError = response.getBody().getValidationErrors();
+        assertThat(validationError.get("username")).isEqualTo("Username cannot be null");
+    }
+    @Test
+    public void postUser_whenUserHasNullDisplayName_receiveMessageOfNullErrorForDisplayName() {
+        User user = createValidUser();
+        user.setDisplayName(null);
+        ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
+        Map<String, String> validationError = response.getBody().getValidationErrors();
+        assertThat(validationError.get("displayName")).isEqualTo("DisplayName cannot be null");
+    }
+
+    @Test
+    public void postUser_whenUserHasNullPassword_receiveMessageOfNullErrorForPassword() {
+        User user = createValidUser();
+        user.setPassword(null);
+        ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
+        Map<String, String> validationError = response.getBody().getValidationErrors();
+        assertThat(validationError.get("password")).isEqualTo("Password cannot be null");
     }
 
     public <T> ResponseEntity<T> postSignUp(Object request, Class<T> response) {
