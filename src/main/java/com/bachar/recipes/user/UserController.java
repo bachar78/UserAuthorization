@@ -16,9 +16,12 @@ import java.util.Map;
 
 @RestController
 public class UserController {
+    private UserService userService;
 
-    @Autowired
-    UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping("/api/1.0/users")
     GenericResponse createUser(@Valid @RequestBody User user) {
         userService.save(user);
