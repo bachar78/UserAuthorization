@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "users")
+//@Table(uniqueConstraints = @UniqueConstraint(columnNames = "username")) for unique constraints
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

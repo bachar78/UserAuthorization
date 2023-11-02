@@ -158,12 +158,28 @@ public class UserControllerTest {
     }
 
     @Test
-    public void postUser_whenUserHasNullPassword_receiveMessageOfNullErrorForPassword() {
+    public void postUser_whenUserHasNotRequiredPasswordType_receiveMessageOfTypeErrorForPassword() {
         User user = createValidUser();
-        user.setPassword(null);
+        user.setPassword("abcdIabcd");
         ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
         Map<String, String> validationError = response.getBody().getValidationErrors();
-        assertThat(validationError.get("password")).isEqualTo("Password cannot be null");
+        assertThat(validationError.get("password")).isEqualTo("Password must have at least one uppercase, one lowercase letter and one number");
+    }
+    @Test
+    public void postUser_whenUserUsesExistingUsername_receiveMessageOfUniqueUsernameError() {
+        User user = createValidUser();
+        userRepository.save(user);
+        ResponseEntity<ApiError> response = postSignUp(user, ApiError.class);
+        Map<String, String> validationError = response.getBody().getValidationErrors();
+        assertThat(validationError.get("username")).isEqualTo("This name is in use");
+    }
+
+    @Test
+    public void postUser_whenUserUsesExistingUsername_receiveBadRequestStatus() {
+        User user = createValidUser();
+        userRepository.save(user);
+        ResponseEntity<Object> response = postSignUp(user, Object.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     public <T> ResponseEntity<T> postSignUp(Object request, Class<T> response) {
