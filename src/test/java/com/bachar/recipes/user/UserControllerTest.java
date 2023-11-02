@@ -190,7 +190,7 @@ public class UserControllerTest {
         User user = new User();
         user.setUsername("test-user");
         user.setDisplayName("test-display");
-        user.setPassword("P@4ssword");
+        user.setPassword("P4ssword");
         return user;
     }
 }
