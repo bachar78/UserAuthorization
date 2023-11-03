@@ -1,5 +1,6 @@
 package com.bachar.recipes.user;
 
+import com.bachar.recipes.error.ApiError;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,11 +29,29 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void postLogin_withUnCorrecttUserCredentials_returnUnauthorized() {
+    public void postLogin_withUnCorrectUserCredentials_returnUnauthorized() {
         authenticate();
         ResponseEntity<Object> response = postLogin(Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
+
+    @Test
+    public void postLogin_withoutUserCredentials_returnApiError() {
+        ResponseEntity<ApiError> response = postLogin(ApiError.class);
+        assertThat(response.getBody().getUrl()).isEqualTo(API_0_1_LOGIN);
+    }
+
+//    @Test
+//    public void postLogin_withoutUserCredentials_returnWithoutWWWAuthenticationHeader() {
+//        ResponseEntity<Object> response = postLogin(Object.class);
+//        assertThat(response.getHeaders().containsKey("WWW-Authenticate")).isFalse();
+//    }
+//    @Test
+//    public void postLogin_withUnCorrectUserCredentials_returnApiError() {
+//        authenticate();
+//        ResponseEntity<Object> response = postLogin(Object.class);
+//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+//    }
 
     private void authenticate() {
         testRestTemplate.getRestTemplate().getInterceptors().add(new BasicAuthenticationInterceptor("test-user","P4ssword"));
