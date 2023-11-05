@@ -1,4 +1,4 @@
-package com.bachar.recipes.configuration;
+package com.bachar.recipes.configuration.jwt;
 
 import lombok.Getter;
 import lombok.Setter;
