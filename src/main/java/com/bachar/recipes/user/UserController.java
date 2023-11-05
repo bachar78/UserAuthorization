@@ -4,6 +4,7 @@ import com.bachar.recipes.error.ApiError;
 import com.bachar.recipes.shared.GenericResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

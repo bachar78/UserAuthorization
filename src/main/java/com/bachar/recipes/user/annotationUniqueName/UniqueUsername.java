@@ -1,4 +1,4 @@
-package com.bachar.recipes.user;
+package com.bachar.recipes.user.annotationUniqueName;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
