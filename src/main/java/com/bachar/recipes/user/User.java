@@ -1,7 +1,7 @@
 package com.bachar.recipes.user;
 
+import com.bachar.recipes.user.annotationUniqueName.UniqueUsername;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

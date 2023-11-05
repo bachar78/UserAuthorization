@@ -1,5 +1,7 @@
-package com.bachar.recipes.user;
+package com.bachar.recipes.user.annotationUniqueName;
 
+import com.bachar.recipes.user.User;
+import com.bachar.recipes.user.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
