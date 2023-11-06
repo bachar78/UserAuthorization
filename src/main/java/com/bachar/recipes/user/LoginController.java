@@ -1,8 +1,9 @@
-package com.bachar.recipes.user.login;
+package com.bachar.recipes.user;
 
 import com.bachar.recipes.configuration.UserPrincipal;
 import com.bachar.recipes.configuration.jwt.JwtIssuer;
 import com.bachar.recipes.user.User;
+import com.bachar.recipes.user.login.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,8 +36,4 @@ public class LoginController {
                 .build();
     }
 
-    @GetMapping("/api/1.0/hello")
-    public String sayHello() {
-        return "If you get till here that means you are authenticated and deserve hello";
-    }
 }
