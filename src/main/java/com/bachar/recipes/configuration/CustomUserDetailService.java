@@ -2,7 +2,7 @@ package com.bachar.recipes.configuration;
 
 
 import com.bachar.recipes.user.User;
-import com.bachar.recipes.user.UserService;
+import com.bachar.recipes.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

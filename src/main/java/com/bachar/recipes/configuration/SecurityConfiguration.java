@@ -41,7 +41,9 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(form -> form.disable())
                 .authorizeHttpRequests((authorization) -> authorization
+                        .requestMatchers(antMatcher(HttpMethod.POST, "/api/1.0/users")).permitAll()
                         .requestMatchers(antMatcher(HttpMethod.POST, "/api/1.0/login")).permitAll()
+                        .requestMatchers(antMatcher("/api/1.0/admin/**")).hasRole("ADMIN")
                         .anyRequest().authenticated());
         return http.build();
     }

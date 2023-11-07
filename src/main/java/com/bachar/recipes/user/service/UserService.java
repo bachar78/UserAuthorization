@@ -1,5 +1,7 @@
-package com.bachar.recipes.user;
+package com.bachar.recipes.user.service;
 
+import com.bachar.recipes.user.User;
+import com.bachar.recipes.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
