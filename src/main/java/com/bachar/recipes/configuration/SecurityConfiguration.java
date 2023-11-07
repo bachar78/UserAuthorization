@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                 .securityMatcher("/api/1.0/**")
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .formLogin(form -> form.disable())
+                .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorization) -> authorization
                         .requestMatchers(antMatcher(HttpMethod.POST, "/api/1.0/login")).permitAll()
                         .anyRequest().authenticated());

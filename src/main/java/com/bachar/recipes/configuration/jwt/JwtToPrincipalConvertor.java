@@ -21,7 +21,7 @@ public class JwtToPrincipalConvertor {
 
         var claim = jwt.getClaim("authorities");
         // Guard clauses
-        if (claim.isMissing() || claim.isMissing()) return List.of();
+        if (claim.isNull() || claim.isMissing()) return List.of();
         return claim.asList(SimpleGrantedAuthority.class);
     }
 }
