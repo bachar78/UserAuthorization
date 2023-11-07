@@ -1,11 +1,11 @@
-package com.bachar.recipes.user;
+package com.bachar.recipes.user.controller;
 
 import com.bachar.recipes.error.ApiError;
 import com.bachar.recipes.shared.GenericResponse;
+import com.bachar.recipes.user.User;
+import com.bachar.recipes.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
